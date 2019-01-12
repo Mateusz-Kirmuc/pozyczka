@@ -16,15 +16,20 @@ class ClientEntity {
     /** @var LoanEntity */
     protected $loan;
 
-    public function __construct($firstName, $lastName) {
+    /**
+     * ClientEntity constructor.
+     * @param string $firstName
+     * @param string $lastName
+     */
+    public function __construct(string $firstName, string $lastName) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
     }
+
     /**
      * @return string
      */
-    public function getFirstName()
-    {
+    public function getFirstName(): string {
         return $this->firstName;
     }
 
@@ -32,8 +37,7 @@ class ClientEntity {
      * @param string $firstName
      * @return ClientEntity
      */
-    public function setFirstName($firstName)
-    {
+    public function setFirstName(string $firstName): ClientEntity {
         $this->firstName = $firstName;
         return $this;
     }
@@ -41,8 +45,7 @@ class ClientEntity {
     /**
      * @return string
      */
-    public function getLastName()
-    {
+    public function getLastName(): string {
         return $this->lastName;
     }
 
@@ -50,8 +53,7 @@ class ClientEntity {
      * @param string $lastName
      * @return ClientEntity
      */
-    public function setLastName($lastName)
-    {
+    public function setLastName(string $lastName): ClientEntity {
         $this->lastName = $lastName;
         return $this;
     }
@@ -59,8 +61,7 @@ class ClientEntity {
     /**
      * @return LoanEntity
      */
-    public function getLoan()
-    {
+    public function getLoan(): LoanEntity {
         return $this->loan;
     }
 
@@ -68,8 +69,7 @@ class ClientEntity {
      * @param LoanEntity $loan
      * @return ClientEntity
      */
-    public function setLoan($loan)
-    {
+    public function setLoan(LoanEntity $loan): ClientEntity {
         $this->loan = $loan;
         return $this;
     }

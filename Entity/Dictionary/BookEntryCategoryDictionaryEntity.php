@@ -18,7 +18,7 @@ class BookEntryCategoryDictionaryEntity {
      * @param $categoryName
      * @param $column
      */
-    public function __construct($categoryName, $column) {
+    public function __construct(string $categoryName, string $column) {
         $this->categoryName = $categoryName;
         $this->column = $column;
     }
@@ -26,8 +26,7 @@ class BookEntryCategoryDictionaryEntity {
     /**
      * @return string
      */
-    public function getCategoryName()
-    {
+    public function getCategoryName(): string {
         return $this->categoryName;
     }
 
@@ -35,8 +34,7 @@ class BookEntryCategoryDictionaryEntity {
      * @param string $categoryName
      * @return BookEntryCategoryDictionaryEntity
      */
-    public function setCategoryName($categoryName)
-    {
+    public function setCategoryName(string $categoryName): BookEntryCategoryDictionaryEntity {
         $this->categoryName = $categoryName;
         return $this;
     }
@@ -44,8 +42,7 @@ class BookEntryCategoryDictionaryEntity {
     /**
      * @return string
      */
-    public function getColumn()
-    {
+    public function getColumn(): string {
         return $this->column;
     }
 
@@ -53,8 +50,7 @@ class BookEntryCategoryDictionaryEntity {
      * @param string $column
      * @return BookEntryCategoryDictionaryEntity
      */
-    public function setColumn($column)
-    {
+    public function setColumn(string $column): BookEntryCategoryDictionaryEntity {
         $this->column = $column;
         return $this;
     }

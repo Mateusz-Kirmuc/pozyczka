@@ -25,8 +25,7 @@ class BookEntryEntity {
     /**
      * @return \DateTime
      */
-    public function getDate()
-    {
+    public function getDate(): \DateTime {
         return $this->date;
     }
 
@@ -34,8 +33,7 @@ class BookEntryEntity {
      * @param \DateTime $date
      * @return BookEntryEntity
      */
-    public function setDate($date)
-    {
+    public function setDate(\DateTime $date): BookEntryEntity {
         $this->date = $date;
         return $this;
     }
@@ -43,8 +41,7 @@ class BookEntryEntity {
     /**
      * @return float
      */
-    public function getAmount()
-    {
+    public function getAmount(): float {
         return $this->amount;
     }
 
@@ -52,8 +49,7 @@ class BookEntryEntity {
      * @param float $amount
      * @return BookEntryEntity
      */
-    public function setAmount($amount)
-    {
+    public function setAmount(float $amount): BookEntryEntity {
         $this->amount = $amount;
         return $this;
     }
@@ -61,8 +57,7 @@ class BookEntryEntity {
     /**
      * @return BookEntryCategoryDictionaryEntity
      */
-    public function getCategory()
-    {
+    public function getCategory(): BookEntryCategoryDictionaryEntity {
         return $this->category;
     }
 
@@ -70,8 +65,7 @@ class BookEntryEntity {
      * @param BookEntryCategoryDictionaryEntity $category
      * @return BookEntryEntity
      */
-    public function setCategory($category)
-    {
+    public function setCategory(BookEntryCategoryDictionaryEntity $category): BookEntryEntity {
         $this->category = $category;
         return $this;
     }
@@ -79,8 +73,7 @@ class BookEntryEntity {
     /**
      * @return BookEntryTypeDictionaryEntity
      */
-    public function getType()
-    {
+    public function getType(): BookEntryTypeDictionaryEntity {
         return $this->type;
     }
 
@@ -88,8 +81,7 @@ class BookEntryEntity {
      * @param BookEntryTypeDictionaryEntity $type
      * @return BookEntryEntity
      */
-    public function setType($type)
-    {
+    public function setType(BookEntryTypeDictionaryEntity $type): BookEntryEntity {
         $this->type = $type;
         return $this;
     }

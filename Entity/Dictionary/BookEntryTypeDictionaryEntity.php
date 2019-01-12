@@ -14,15 +14,14 @@ class BookEntryTypeDictionaryEntity {
      * BookEntryTypeDictionaryEntity constructor.
      * @param $type
      */
-    public function __construct($type) {
+    public function __construct(string $type) {
         $this->type = $type;
     }
 
     /**
      * @return string
      */
-    public function getType()
-    {
+    public function getType(): string {
         return $this->type;
     }
 
@@ -30,8 +29,7 @@ class BookEntryTypeDictionaryEntity {
      * @param string $type
      * @return BookEntryTypeDictionaryEntity
      */
-    public function setType($type)
-    {
+    public function setType(string $type): BookEntryTypeDictionaryEntity {
         $this->type = $type;
         return $this;
     }

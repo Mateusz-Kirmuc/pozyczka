@@ -33,7 +33,7 @@ class LoanEntity {
      * @param $interestPercent
      * @throws \Exception
      */
-    public function __construct($client, $amount, $provisionPercent, $interestPercent) {
+    public function __construct(ClientEntity $client, float $amount, float $provisionPercent, float $interestPercent) {
         $this->client = $client;
         $this->amount = $amount;
         $this->provisionPercent = $provisionPercent;
@@ -45,8 +45,7 @@ class LoanEntity {
     /**
      * @return \DateTime
      */
-    public function getDate()
-    {
+    public function getDate(): \DateTime {
         return $this->date;
     }
 
@@ -54,8 +53,7 @@ class LoanEntity {
      * @param \DateTime $date
      * @return LoanEntity
      */
-    public function setDate($date)
-    {
+    public function setDate(\DateTime $date): LoanEntity {
         $this->date = $date;
         return $this;
     }
@@ -63,8 +61,7 @@ class LoanEntity {
     /**
      * @return ClientEntity
      */
-    public function getClient()
-    {
+    public function getClient(): ClientEntity {
         return $this->client;
     }
 
@@ -72,8 +69,7 @@ class LoanEntity {
      * @param ClientEntity $client
      * @return LoanEntity
      */
-    public function setClient($client)
-    {
+    public function setClient(ClientEntity $client): LoanEntity {
         $this->client = $client;
         return $this;
     }
@@ -81,8 +77,7 @@ class LoanEntity {
     /**
      * @return float
      */
-    public function getAmount()
-    {
+    public function getAmount(): float {
         return $this->amount;
     }
 
@@ -90,8 +85,7 @@ class LoanEntity {
      * @param float $amount
      * @return LoanEntity
      */
-    public function setAmount($amount)
-    {
+    public function setAmount(float $amount): LoanEntity {
         $this->amount = $amount;
         return $this;
     }
@@ -99,8 +93,7 @@ class LoanEntity {
     /**
      * @return float
      */
-    public function getProvisionPercent()
-    {
+    public function getProvisionPercent(): float {
         return $this->provisionPercent;
     }
 
@@ -108,8 +101,7 @@ class LoanEntity {
      * @param float $provisionPercent
      * @return LoanEntity
      */
-    public function setProvisionPercent($provisionPercent)
-    {
+    public function setProvisionPercent(float $provisionPercent): LoanEntity {
         $this->provisionPercent = $provisionPercent;
         return $this;
     }
@@ -117,8 +109,7 @@ class LoanEntity {
     /**
      * @return float
      */
-    public function getInterestPercent()
-    {
+    public function getInterestPercent(): float {
         return $this->interestPercent;
     }
 
@@ -126,8 +117,7 @@ class LoanEntity {
      * @param float $interestPercent
      * @return LoanEntity
      */
-    public function setInterestPercent($interestPercent)
-    {
+    public function setInterestPercent(float $interestPercent): LoanEntity {
         $this->interestPercent = $interestPercent;
         return $this;
     }
@@ -135,8 +125,7 @@ class LoanEntity {
     /**
      * @return BookEntryEntity[]
      */
-    public function getBook()
-    {
+    public function getBook(): array {
         return $this->book;
     }
 
@@ -144,8 +133,7 @@ class LoanEntity {
      * @param BookEntryEntity[] $book
      * @return LoanEntity
      */
-    public function setBook($book)
-    {
+    public function setBook(array $book): LoanEntity {
         $this->book = $book;
         return $this;
     }
