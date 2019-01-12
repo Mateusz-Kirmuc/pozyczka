@@ -27,10 +27,19 @@ class LoanEntity {
 
     /**
      * LoanEntity constructor.
+     * @param $client
+     * @param $amount
+     * @param $provisionPercent
+     * @param $interestPercent
      * @throws \Exception
      */
-    public function __construct() {
+    public function __construct($client, $amount, $provisionPercent, $interestPercent) {
+        $this->client = $client;
+        $this->amount = $amount;
+        $this->provisionPercent = $provisionPercent;
+        $this->interestPercent = $interestPercent;
         $this->date = new \DateTime();
+        $this->book = [];
     }
 
     /**
