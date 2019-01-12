@@ -16,6 +16,10 @@ class ClientEntity {
     /** @var LoanEntity */
     protected $loan;
 
+    public function __construct($firstName, $lastName) {
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+    }
     /**
      * @return string
      */
