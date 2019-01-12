@@ -11,6 +11,14 @@ class BookEntryTypeDictionaryEntity {
     protected $type;
 
     /**
+     * BookEntryTypeDictionaryEntity constructor.
+     * @param $type
+     */
+    public function __construct($type) {
+        $this->type = $type;
+    }
+
+    /**
      * @return string
      */
     public function getType()
