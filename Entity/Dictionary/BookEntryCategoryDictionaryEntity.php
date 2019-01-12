@@ -14,6 +14,16 @@ class BookEntryCategoryDictionaryEntity {
     protected $column;
 
     /**
+     * BookEntryCategoryDictionaryEntity constructor.
+     * @param $categoryName
+     * @param $column
+     */
+    public function __construct($categoryName, $column) {
+        $this->categoryName = $categoryName;
+        $this->column = $column;
+    }
+
+    /**
      * @return string
      */
     public function getCategoryName()
