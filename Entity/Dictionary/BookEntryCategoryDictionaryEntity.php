@@ -7,6 +7,10 @@ namespace Entity\Dictionary;
  * @package Entity
  */
 class BookEntryCategoryDictionaryEntity {
+    public const CATEGORY_NAME_CHARGE = 'charge';
+
+    public const COLUMN_OWE = 'owe';
+
     /** @var string */
     protected $categoryName;
 
