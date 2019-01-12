@@ -137,4 +137,11 @@ class LoanEntity {
         $this->book = $book;
         return $this;
     }
+
+    /**
+     * @param BookEntryEntity $entry
+     */
+    public function addEntryToBook(BookEntryEntity $entry): void {
+        $this->book[] = $entry;
+    }
 }
