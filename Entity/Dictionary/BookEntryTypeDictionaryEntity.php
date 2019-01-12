@@ -9,6 +9,7 @@ namespace Entity\Dictionary;
 class BookEntryTypeDictionaryEntity {
     const TYPE_NAME_CAPITAL = 'capital';
     const TYPE_NAME_PROVISION = 'provision';
+    const TYPE_NAME_INTEREST = 'interest';
 
     /** @var string */
     protected $typeName;
