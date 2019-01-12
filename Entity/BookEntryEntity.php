@@ -23,6 +23,20 @@ class BookEntryEntity {
     protected $type;
 
     /**
+     * BookEntryEntity constructor.
+     * @param float $amount
+     * @param BookEntryCategoryDictionaryEntity $category
+     * @param BookEntryTypeDictionaryEntity $type
+     * @throws \Exception
+     */
+    public function __construct(float $amount, BookEntryCategoryDictionaryEntity $category, BookEntryTypeDictionaryEntity $type) {
+        $this->date = new \DateTime();
+        $this->amount = $amount;
+        $this->category = $category;
+        $this->type = $type;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getDate(): \DateTime {
