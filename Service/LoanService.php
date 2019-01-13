@@ -21,6 +21,7 @@ class LoanService {
             BookEntryCategoryDictionaryEntity::CATEGORY_NAME_CHARGE,
             BookEntryTypeDictionaryEntity::TYPE_NAME_CAPITAL
         );
+        $entryCapital->setIsSettled(false);
         $loan->addEntryToBook($entryCapital);
 
         // book provision
@@ -29,6 +30,7 @@ class LoanService {
             BookEntryCategoryDictionaryEntity::CATEGORY_NAME_CHARGE,
             BookEntryTypeDictionaryEntity::TYPE_NAME_PROVISION
         );
+        $entryProvision->setIsSettled(false);
         $loan->addEntryToBook($entryProvision);
     }
 
@@ -44,7 +46,76 @@ class LoanService {
             BookEntryCategoryDictionaryEntity::CATEGORY_NAME_CHARGE,
             BookEntryTypeDictionaryEntity::TYPE_NAME_INTEREST
         );
+        $entry->setIsSettled(false);
         $loan->addEntryToBook($entry);
+    }
+
+    /**
+     * @param LoanEntity $loan
+     * @param float $amount
+     * @throws \Exception
+     */
+    public function payment(LoanEntity $loan, float $amount): void {
+        // book capital
+        $loan->addEntryToBook($this->createBookEntry(
+            $amount,
+            BookEntryCategoryDictionaryEntity::CATEGORY_NAME_RECOGNITION,
+            BookEntryTypeDictionaryEntity::TYPE_NAME_PAYMENT
+        ));
+
+        // group book by entry type
+        $groupedBook = [];
+
+        foreach ($loan->getBook() as $entry) {
+            if ($entry->isSettled() === false) {
+                $groupedBook[$entry->getType()->getTypeName()][] = $entry;
+            }
+        }
+
+        // settlement of interest
+        $bookedInterests = $groupedBook[BookEntryTypeDictionaryEntity::TYPE_NAME_INTEREST];
+        /** @var BookEntryEntity $interest */
+        foreach ($bookedInterests as $interest) {
+            $entry = $this->createBookEntry(
+                $interest->getAmount(),
+                BookEntryCategoryDictionaryEntity::CATEGORY_NAME_SETTLEMENT,
+                $interest->getType()->getTypeName()
+            );
+            $amount -= $entry->getAmount();
+            if($amount){
+                $loan->addEntryToBook($entry);
+                $interest->setIsSettled(true);
+            }
+        }
+
+        // settlement of provision
+        /** @var BookEntryEntity $bookedProvision */
+        $bookedProvision = $groupedBook[BookEntryTypeDictionaryEntity::TYPE_NAME_PROVISION][0];
+        $entryProvision = $this->createBookEntry(
+            $bookedProvision->getAmount(),
+            BookEntryCategoryDictionaryEntity::CATEGORY_NAME_SETTLEMENT,
+            $bookedProvision->getType()->getTypeName()
+        );
+
+        $amount -= $entryProvision->getAmount();
+
+        if ($amount) {
+            $loan->addEntryToBook($entryProvision);
+            $bookedProvision->setIsSettled(true);
+        }
+
+        // settlement of capital
+        /** @var BookEntryEntity $bookedCapital */
+        $bookedCapital = $groupedBook[BookEntryTypeDictionaryEntity::TYPE_NAME_CAPITAL][0];
+        $entryCapital = $this->createBookEntry(
+            $amount,
+            BookEntryCategoryDictionaryEntity::CATEGORY_NAME_SETTLEMENT,
+            $bookedCapital->getType()->getTypeName()
+        );
+        if ($amount){
+            $loan->addEntryToBook($entryCapital);
+            $bookedCapital->setIsSettled(true);
+        }
     }
 
     /**
