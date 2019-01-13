@@ -119,6 +119,32 @@ class LoanService {
     }
 
     /**
+     * @param LoanEntity $loan
+     * @param int $dayNumber
+     * @return int
+     * @throws \Exception
+     */
+    public function getBalance(LoanEntity $loan, int $dayNumber): int {
+        $loanStartDay = new \DateTime($loan->getDate()->format('Y-m-d'));
+        $loanRequestedDay = $loanStartDay->modify("+ {$dayNumber} day");
+        $balance = 0;
+
+        foreach ($loan->getBook() as $entry) {
+            if ($entry->getDate() < $loanRequestedDay) {
+                if ($entry->getCategory()->getCategoryName() === BookEntryCategoryDictionaryEntity::CATEGORY_NAME_RECOGNITION ||
+                    $entry->getCategory()->getCategoryName() === BookEntryCategoryDictionaryEntity::CATEGORY_NAME_SETTLEMENT
+                ) {
+                    $balance -= $entry->getAmount();
+                } elseif ($entry->getCategory()->getCategoryName() === BookEntryCategoryDictionaryEntity::CATEGORY_NAME_CHARGE) {
+                    $balance += $entry->getAmount();
+                }
+            }
+        }
+
+        return $balance;
+    }
+
+    /**
      * @param float $amount
      * @param string $categoryName
      * @param string $typeName
