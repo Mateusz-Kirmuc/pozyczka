@@ -28,13 +28,14 @@ class BookEntryEntity {
     /**
      * BookEntryEntity constructor.
      * @param float $amount
+     * @param bool $isSettled
      * @param BookEntryCategoryDictionaryEntity $category
      * @param BookEntryTypeDictionaryEntity $type
      * @throws \Exception
      */
-    public function __construct(float $amount, BookEntryCategoryDictionaryEntity $category, BookEntryTypeDictionaryEntity $type) {
+    public function __construct(float $amount, BookEntryCategoryDictionaryEntity $category, BookEntryTypeDictionaryEntity $type, bool $isSettled = true) {
         $this->date = new \DateTime();
-        $this->isSettled = false;
+        $this->isSettled = $isSettled;
         $this->amount = $amount;
         $this->category = $category;
         $this->type = $type;
