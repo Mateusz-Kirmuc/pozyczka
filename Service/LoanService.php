@@ -14,21 +14,23 @@ class LoanService {
      * @throws \Exception
      */
     public function initLoan(LoanEntity $loan): void {
-        $categoryCharge = new BookEntryCategoryDictionaryEntity(
-            BookEntryCategoryDictionaryEntity::CATEGORY_NAME_CHARGE,
-            BookEntryCategoryDictionaryEntity::COLUMN_OWE
-        );
-
         // book capital
-        $typeCapital = new BookEntryTypeDictionaryEntity(BookEntryTypeDictionaryEntity::TYPE_NAME_CAPITAL);
         $amountCapital = $loan->getAmount();
-        $entryCapital = new BookEntryEntity($amountCapital, $categoryCharge, $typeCapital);
+        $entryCapital = $this->createBookEntry(
+            $amountCapital,
+            BookEntryCategoryDictionaryEntity::CATEGORY_NAME_CHARGE,
+            BookEntryCategoryDictionaryEntity::COLUMN_OWE,
+            BookEntryTypeDictionaryEntity::TYPE_NAME_CAPITAL
+        );
         $loan->addEntryToBook($entryCapital);
 
         // book provision
-        $typeProvision = new BookEntryTypeDictionaryEntity(BookEntryTypeDictionaryEntity::TYPE_NAME_PROVISION);
         $amountProvision = $loan->getAmount() * $loan->getProvisionPercent() / 100;
-        $entryProvision = new BookEntryEntity($amountProvision, $categoryCharge, $typeProvision);
+        $entryProvision = $this->createBookEntry($amountProvision,
+            BookEntryCategoryDictionaryEntity::CATEGORY_NAME_CHARGE,
+            BookEntryCategoryDictionaryEntity::COLUMN_OWE,
+            BookEntryTypeDictionaryEntity::TYPE_NAME_PROVISION
+        );
         $loan->addEntryToBook($entryProvision);
     }
 
@@ -38,12 +40,28 @@ class LoanService {
      */
     public function chargeInterest(LoanEntity $loan): void {
         // book interest
-        $category = new BookEntryCategoryDictionaryEntity(
-            BookEntryCategoryDictionaryEntity::CATEGORY_NAME_CHARGE,
-            BookEntryCategoryDictionaryEntity::COLUMN_OWE);
-        $type = new BookEntryTypeDictionaryEntity(BookEntryTypeDictionaryEntity::TYPE_NAME_INTEREST);
         $amount = $loan->getAmount() * $loan->getInterestPercent() / 100;
-        $entry = new BookEntryEntity($amount, $category, $type);
+        $entry = $this->createBookEntry(
+            $amount,
+            BookEntryCategoryDictionaryEntity::CATEGORY_NAME_CHARGE,
+            BookEntryCategoryDictionaryEntity::COLUMN_OWE,
+            BookEntryTypeDictionaryEntity::TYPE_NAME_INTEREST
+        );
         $loan->addEntryToBook($entry);
+    }
+
+    /**
+     * @param float $amount
+     * @param string $categoryName
+     * @param string $column
+     * @param string $typeName
+     * @return BookEntryEntity
+     * @throws \Exception
+     */
+    private function createBookEntry(float $amount, string $categoryName, string $column, string $typeName): BookEntryEntity {
+        $category = new BookEntryCategoryDictionaryEntity($categoryName, $column);
+        $type = new BookEntryTypeDictionaryEntity($typeName);
+        $entry = new BookEntryEntity($amount, $category, $type);
+        return $entry;
     }
 }
