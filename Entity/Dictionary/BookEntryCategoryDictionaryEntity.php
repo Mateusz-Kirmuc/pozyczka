@@ -8,6 +8,8 @@ namespace Entity\Dictionary;
  */
 class BookEntryCategoryDictionaryEntity {
     public const CATEGORY_NAME_CHARGE = 'charge';
+    public const CATEGORY_NAME_SETTLEMENT = 'settlement';
+    public const CATEGORY_NAME_RECOGNITION = 'recognition';
 
     /** @var string */
     protected $categoryName;
