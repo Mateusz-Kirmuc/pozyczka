@@ -22,6 +22,9 @@ class BookEntryEntity {
     /** @var BookEntryTypeDictionaryEntity */
     protected $type;
 
+    /** @var boolean */
+    protected $isSettled;
+
     /**
      * BookEntryEntity constructor.
      * @param float $amount
@@ -31,6 +34,7 @@ class BookEntryEntity {
      */
     public function __construct(float $amount, BookEntryCategoryDictionaryEntity $category, BookEntryTypeDictionaryEntity $type) {
         $this->date = new \DateTime();
+        $this->isSettled = false;
         $this->amount = $amount;
         $this->category = $category;
         $this->type = $type;
@@ -97,6 +101,22 @@ class BookEntryEntity {
      */
     public function setType(BookEntryTypeDictionaryEntity $type): BookEntryEntity {
         $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSettled(): bool {
+        return $this->isSettled;
+    }
+
+    /**
+     * @param bool $isSettled
+     * @return BookEntryEntity
+     */
+    public function setIsSettled(bool $isSettled): BookEntryEntity {
+        $this->isSettled = $isSettled;
         return $this;
     }
 }
